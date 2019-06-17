@@ -16,7 +16,7 @@ class GameView extends React.Component {
   }
 
   static propTypes = {
-    onload: PropTypes.func
+    onload: PropTypes.func.isRequired
   }
 
   selectThePlayer(bot) {
@@ -28,7 +28,10 @@ class GameView extends React.Component {
   }
 
   reset() {
-      this.setState({targetPlayer: "", targetCard: ""})
+    this.setState({targetPlayer: "", targetCard: ""})
+    if (this.state.game.winner() !== false) {
+      this.props.onload()
+    }
   }
 
   render() {
@@ -39,6 +42,12 @@ class GameView extends React.Component {
       this.props.onload(this.state.game)
     }
   }
+
+  // componentDidUpdate() {
+  //   if (this.state.game.winner() !== false) {
+  //     this.props.onload()
+  //   }
+  // }
 
   gameHtml() {
     return (
@@ -52,6 +61,9 @@ class GameView extends React.Component {
   skipPlayer() {
     this.state.game.nextTurn()
     this.state.logs.unshift(...this.state.game.botTurns())
+    if (this.state.game.winner() !== false) {
+      this.props.onload()
+    }
   }
 }
 export default GameView

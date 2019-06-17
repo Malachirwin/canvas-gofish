@@ -50,6 +50,10 @@ class PlayerView extends React.Component {
     return this.props.player.matches().map((match, index) => <div key={index} className="matches inbetween-match">{match.map((card, i) => <CardView key={i} value={card.value()} classes={'match'} onClick={()=>{}} /> )}</div>)
   }
 
+  log() {
+    return this.props.logs.slice(0, 20).map((book, index) => <h4 key={index} className="book">{book}</h4>)
+  }
+
   render() {
     // console.log(this.props.logs)
     return (<div>
@@ -57,6 +61,7 @@ class PlayerView extends React.Component {
       {this.cardHtml()}
       <div className="matchesWrapper">{this.matchesHtml()}</div>
       {(this.props.targetCard !== '' && this.props.targetPlayer !== '') ? this.displayButton() : ''}
+      <div className="log"><h4 className="book">Logs</h4>{this.log()}</div>
     </div>)
   }
 }

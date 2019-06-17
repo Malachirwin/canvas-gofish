@@ -6049,7 +6049,7 @@ ndb-node-pty-prebuilt@^0.8.0:
     decompress-targz "^4.1.1"
     nan "2.10.0"
 
-ndb@^1.0.35:
+ndb@^1.0.37:
   version "1.0.45"
   resolved "https://registry.yarnpkg.com/ndb/-/ndb-1.0.45.tgz#a29c5eea8eade4d8bd1a9d2f1fd4b7bac9082811"
   dependencies:

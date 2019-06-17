@@ -3,6 +3,7 @@ import React from 'react';
 import Login from './Login.js'
 import Game from '../models/game.js'
 import GameView from './gameView.js'
+import EndGame from './endGame.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,14 +24,14 @@ class App extends React.Component {
   }
 
   endGame() {
-    this.setState({view: 'endGame'})
+    this.setState({view: 'EndGame'})
   }
 
   render() {
     if (this.state.view === 'Login'){
       return <Login onload={this.startGame.bind(this)}/>
     } else if (this.state.view === 'EndGame') {
-      return <GameEnd onload={this.login.bind(this)} game={this.state.game} />
+      return <EndGame onload={this.login.bind(this)} game={this.state.game} />
     }
     return <GameView onload={this.endGame.bind(this)} game={this.state.game}/>
   }

@@ -133,15 +133,15 @@ h4.book {
   background-color: lightgrey;
   /* float: bottom; */
   /* float: right; */
-  margin-right: 40px;
+  /* margin-right: 40px;
   margin-bottom: 40px;
-  margin-top: -350px;
+  margin-top: -350px; */
   border: 3px solid grey;
   border-radius: 20px;
-  padding-top: 20px;
-  padding-left: 10px;
+  padding-top: 30px;
+  /* padding-left: 10px;
   padding-right: 10px;
-  padding-bottom: -40px;
+  padding-bottom: -40px; */
 }
 
 .submit {

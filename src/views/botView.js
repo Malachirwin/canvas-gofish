@@ -29,7 +29,7 @@ class BotView extends React.Component {
     return (
       <div className={this.classes()} onClick={this.props.clicked.bind(this, this.props.player.name())}>
         <h3>{this.props.player.name()}</h3>
-        {this.cards()}
+        <div className="bot-hand">{this.cards()}</div>
         <div className="matchesWrapper">{this.matchesHtml()}</div>
       </div>
     )

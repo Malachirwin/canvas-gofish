@@ -28,7 +28,7 @@ class BotView extends React.Component {
   render() {
     return (
       <div className={this.classes()} onClick={this.props.clicked.bind(this, this.props.player.name())}>
-        <h3>{this.props.player.name()}</h3>
+        <h3 className="bot-name">{this.props.player.name()}</h3>
         <div className="bot-hand">{this.cards()}</div>
         <div className="matchesWrapper">{this.matchesHtml()}</div>
       </div>

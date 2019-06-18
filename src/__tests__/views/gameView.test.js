@@ -5,23 +5,22 @@ import Game from '../../models/game'
 import 'jest-enzyme'
 
 describe('GameView', () => {
-  let game
+  let game, wrapper, wrapper2
   beforeEach(() => {
     game = new Game('Malachi')
+    wrapper = mount(<GameView onload={jest.fn()} game={game}/>)
+    wrapper2 = shallow(<GameView onload={jest.fn()} game={game}/>)
   })
 
   it('renders PlayerView', () => {
-    const wrapper = shallow(<GameView onload={jest.fn()} game={game}/>)
-    expect(wrapper).toIncludeText('<PlayerView />')
+    expect(wrapper2).toIncludeText('<PlayerView />')
   });
   
   it('renders Game', () => {
-    const wrapper = shallow(<GameView onload={jest.fn()} game={game}/>)
-    expect(wrapper).toHaveClassName('center')
+    expect(wrapper2).toHaveClassName('center')
   });
 
   it('updates state and highlights a card when it is clicked', () => {
-    const wrapper = mount(<GameView onload={jest.fn()} game={game}/>)
     const card = wrapper.find('.card-in-hand').first()
     card.simulate('click')
     expect(card.html()).toContain('highlight')
@@ -29,14 +28,12 @@ describe('GameView', () => {
   })
 
   it('displays a button if target card and player are not blank', () => {
-    const wrapper = mount(<GameView onload={jest.fn()} game={game}/>)
     wrapper.find('.card-in-hand').first().simulate('click')
     wrapper.find('.bot').first().simulate('click')
     expect(wrapper.find('button').first()).toHaveText('Request')
   })
 
   it('runs a round', () => {
-    const wrapper = mount(<GameView onload={jest.fn()} game={game}/>)
     wrapper.find('.card-in-hand').first().simulate('click')
     wrapper.find('.bot').first().simulate('click')
     wrapper.find('form').simulate('submit', {preventDefault: () => {}})

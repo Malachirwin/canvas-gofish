@@ -10,6 +10,7 @@ class Game {
     const playersHands = this._deck.deal()
     this._players = [new Player(name, playersHands[0])]
     this._playerTurn = 1
+    this._logs = []
     Array.from([1, 2, 3]).forEach((num) => { this._players.push(new Player(Names.name(), playersHands[num])) })
   }
 
@@ -96,6 +97,7 @@ class Game {
       return this.botRequest(this.playerWhoIsPlaying())
     } else {
       this.nextTurn()
+      this._logs.unshift(`${this.playerWhoIsPlaying().name()} is out of cards`)
       return `${this.playerWhoIsPlaying().name()} is out of cards`
     }
   }
@@ -155,6 +157,7 @@ class Game {
     const result = this.cardInPlayerHand(playerWhoWasAsked, playerRequest.desired_rank, playerWhoAsked);
     this.pair();
     this.noCards();
+    this._logs.unshift(this.book(playerRequest, result))
     return result
   }
 

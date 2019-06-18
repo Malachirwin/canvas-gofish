@@ -4,13 +4,6 @@ import CardView from './cardView'
 import PropTypes from 'prop-types';
 
 class PlayerView extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      cardView: new CardView()
-    }
-  }
-
   static propTypes = {
     game: PropTypes.object.isRequired,
     logs: PropTypes.array.isRequired,
@@ -62,7 +55,6 @@ class PlayerView extends React.Component {
   }
 
   render() {
-    // console.log(this.props.logs)
     return (<div>
       <h1>{this.props.player.name()}</h1>
       <div className="player-hand">{this.cardHtml()}</div>

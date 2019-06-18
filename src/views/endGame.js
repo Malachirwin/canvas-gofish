@@ -1,7 +1,13 @@
 import React from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
 
 class EndGame extends React.Component {
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+    onload: PropTypes.func.isRequired
+  }
+
   onSubmit(event) {
     event.preventDefault()
     this.props.onload()

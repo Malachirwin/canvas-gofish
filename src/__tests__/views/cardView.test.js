@@ -8,4 +8,9 @@ describe('CardView', () => {
     const wrapper = shallow(<CardView value={'6 of Hearts'} classes={'card-in-hand'} onClick={jest.fn()} />)
     expect(wrapper).toHaveClassName('card-in-hand')
   });
+
+  it('returns card back', () => {
+    const wrapper = shallow(<CardView />)
+    expect(wrapper).toHaveClassName('card-back')
+  })
 })

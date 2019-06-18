@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../App.css';
 import Login from './Login.js'
 import Game from '../models/game.js'
 import GameView from './gameView.js'

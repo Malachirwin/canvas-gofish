@@ -1,10 +1,10 @@
 import CardDeck from '../models/cardDeck'
 import React from 'react'
-import cardBack from '../public/cards/backs_custom.jpg'
+import cardBack from '../public/images/backs_custom.jpg'
 import PropTypes from 'prop-types';
 const hash = {}
 new CardDeck().cards().forEach((card) => {
-  hash[card.value()] = require(`../public/cards/${card.toImgPath()}`)
+  hash[card.value()] = require(`../public/images/${card.toImgPath()}`)
 })
 
 class CardView extends React.Component {

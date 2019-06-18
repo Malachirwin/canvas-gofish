@@ -4,21 +4,22 @@ import { shallow } from 'enzyme';
 import 'jest-enzyme'
 
 describe('Login', () => {
+  let wrapper, userName, callBack
+  beforeEach(() => {
+    callBack = (name) => { userName = name }
+    wrapper = shallow(<Login onload={callBack}/>)
+  })
+
   it('renders a label and has state name', () => {
-    const wrapper = shallow(<Login />)
     expect(wrapper).toIncludeText('Name')
     expect(wrapper).toHaveState('name')
   });
 
   it('has a play button', () => {
-    const wrapper = shallow(<Login />)
     expect(wrapper).toIncludeText('Play')
   });
 
   it('allows you to submit a name', () => {
-    let userName
-    const callBack = (name) => { userName = name }
-    const wrapper = shallow(<Login onload={callBack}/>)
     wrapper.find('input').simulate('change', {
       target: { value: 'Malachi' }
     })

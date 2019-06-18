@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,6 +9,10 @@ class Login extends React.Component {
       error: '',
       name: ''
     }
+  }
+
+  static propTypes = {
+    onload: PropTypes.func.isRequired
   }
 
   onSubmit(event) {

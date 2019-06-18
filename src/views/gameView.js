@@ -16,7 +16,8 @@ class GameView extends React.Component {
   }
 
   static propTypes = {
-    onload: PropTypes.func.isRequired
+    onload: PropTypes.func.isRequired,
+    game: PropTypes.object.isRequired
   }
 
   selectThePlayer(bot) {
@@ -42,12 +43,6 @@ class GameView extends React.Component {
       this.props.onload(this.state.game)
     }
   }
-
-  // componentDidUpdate() {
-  //   if (this.state.game.winner() !== false) {
-  //     this.props.onload()
-  //   }
-  // }
 
   gameHtml() {
     return (

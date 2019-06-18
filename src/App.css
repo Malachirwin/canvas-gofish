@@ -35,6 +35,9 @@ label {
 .playing-space {
   text-align: center;
   height: 96px;
+  margin-left: 57px;
+  margin-top: auto; 
+  margin-bottom: auto;
 }
 
 .card-back {
@@ -48,7 +51,7 @@ label {
 }
 
 .player-hand {
-  margin-left: 30px;
+  margin-left: 50px;
   text-align: center;
   display: inline;
 }
@@ -128,17 +131,17 @@ h4.book {
 
 .bot {
   margin: 30px;
-  padding: 0 30px 0 60px;
 }
 
 .bot-hand {
-  margin-right: -20px;
+  margin-left: 57px;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 @media only screen and (max-width: 823px) {
   h4.book {
     margin-top: -15px;
@@ -148,6 +151,7 @@ h4.book {
     margin-left: -65px;
   }
 }
+
 @media only screen and (max-width: 414px) {
   .flex-container {
     flex-wrap: wrap;

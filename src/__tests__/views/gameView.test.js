@@ -37,6 +37,6 @@ describe('GameView', () => {
     wrapper.find('.card-in-hand').first().simulate('click')
     wrapper.find('.bot').first().simulate('click')
     wrapper.find('form').simulate('submit', {preventDefault: () => {}})
-    expect(wrapper.state('logs')[wrapper.state('logs').length - 1]).toContain(game.player().name())
+    expect(wrapper.state('game')._logs[wrapper.state('game')._logs.length - 1]).toContain(game.player().name())
   })
 })

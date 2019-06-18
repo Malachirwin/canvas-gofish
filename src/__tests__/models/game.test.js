@@ -59,6 +59,28 @@ describe("Game", () => {
     expect(player3.cardsLeft()).toEqual(2)
   })
 
+  it("puts what happened in the game log", () => {
+    player4.setHand([new Card('3', 'D'), new Card('5', 'D'), new Card('2', 'D')])
+    player3.setHand([new Card('3', "H")])
+    const playerRequest = { playerWhoWasAsked: player4.name(), playerWhoAsked: player3.name(), desired_rank: '3' }
+    expect(game.doTurn(playerRequest)).toEqual("3 of Diamonds")
+    expect(game._logs).toEqual([`${player3.name()} took the 3 of Diamonds from ${player4.name()}`])
+    expect(player4.cardsLeft()).toEqual(2)
+    expect(player3.cardsLeft()).toEqual(2)
+  })
+
+  it("runs a bot request and asks for a card if it was just asked for when on level hard", () => {
+    game._level = 'hard'
+    player4.setHand([new Card('3', 'D'), new Card('5', 'D'), new Card('2', 'D')])
+    player3.setHand([new Card('3', "H")])
+    player2.setHand([new Card('3', 'S')])
+    const playerRequest = { playerWhoWasAsked: player4.name(), playerWhoAsked: player3.name(), desired_rank: '3' }
+    game.doTurn(playerRequest)
+    game.botRequest(player2)
+    expect(player2.cardsLeft()).toEqual(3)
+    expect(player3.cardsLeft()).toEqual(5)
+  })
+
   it("play around and can play bot turns", () => {
     game.deck().removeAllCardsFromDeck()
     player1.setHand([new Card('3', 'S'), new Card('4', 'S')])

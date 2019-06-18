@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 class PlayerView extends React.Component {
   static propTypes = {
     game: PropTypes.object.isRequired,
-    logs: PropTypes.array.isRequired,
     targetCard: PropTypes.string.isRequired,
     player: PropTypes.object.isRequired,
     clicked: PropTypes.func.isRequired
@@ -15,8 +14,9 @@ class PlayerView extends React.Component {
   play(event) {
     event.preventDefault()
     const request = { playerWhoWasAsked: this.props.targetPlayer, playerWhoAsked: this.props.game.player().name(), desired_rank: this.props.targetCard }
-    this.props.logs.unshift(this.props.game.book(request, this.props.game.doTurn(request)))
-    this.props.logs.unshift(...this.props.game.botTurns())
+    this.props.game.doTurn(request)
+    this.props.game.botTurns()
+
     this.props.reset()
   }
 
@@ -51,7 +51,7 @@ class PlayerView extends React.Component {
   }
 
   log() {
-    return this.props.logs.slice(0, this.howManyLogs()).map((book, index) => <h4 key={index} className="book">{book}</h4>)
+    return this.props.game._logs.slice(0, this.howManyLogs()).map((book, index) => <h4 key={index} className="book">{book}</h4>)
   }
 
   render() {

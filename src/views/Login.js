@@ -7,7 +7,8 @@ class Login extends React.Component {
     super(props)
     this.state = {
       error: '',
-      name: ''
+      name: '',
+      value: 'easy'
     }
   }
 
@@ -18,10 +19,14 @@ class Login extends React.Component {
   onSubmit(event) {
     event.preventDefault()
     if (this.state.name !== '') {
-      this.props.onload(this.state.name)
+      this.props.onload(this.state.name, this.state.value)
     } else {
       this.setState({error: "Name can NOT be blank!"})
     }
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -31,6 +36,10 @@ class Login extends React.Component {
           {this.errorHtml()}
           <label>Name</label>
           <input id="name" type="text" name="name" onChange={(e) => {this.setState({name: e.target.value})}} value={this.state.name} placeholder="Example" autoFocus></input>
+          <select value={this.state.value} onChange={(e) => {this.handleChange(e)}} >
+            <option value="easy">Easy</option>
+            <option value="hard">Hard</option>
+          </select>
           <button type="submit" name="Play">Play</button>
         </form>
       </div>

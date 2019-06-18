@@ -4,13 +4,14 @@ import CardDeck from './cardDeck.js'
 import Names from './names'
 
 class Game {
-  constructor(name) {
+  constructor(name, level) {
     this._deck = new CardDeck()
     this._deck.shuffle()
     const playersHands = this._deck.deal()
     this._players = [new Player(name, playersHands[0])]
     this._playerTurn = 1
     this._logs = []
+    this._level = level
     Array.from([1, 2, 3]).forEach((num) => { this._players.push(new Player(Names.name(), playersHands[num])) })
   }
 
@@ -103,8 +104,12 @@ class Game {
   }
 
   botRequest(player) {
-    const playerToAsk = this.randomPlayer()
-    const cardToAsk = player.playerHand()[Math.floor(Math.random() * player.playerHand().length)]
+    let cardToAsk, playerToAsk
+    if (this._level === 'easy') {
+      [cardToAsk, playerToAsk] = this.randomCardAndPlayer(player)
+    } else {
+      [cardToAsk, playerToAsk] = this.pickPlayerAndCard(player)
+    }
     const playerRequest = { playerWhoWasAsked: playerToAsk.name(), playerWhoAsked: player.name(), desired_rank: cardToAsk.rank() }
     return this.book(playerRequest, this.doTurn(playerRequest))
   }
@@ -115,6 +120,21 @@ class Game {
       playerToAsk = this.players()[Math.floor(Math.random() * this.players().length)]
     }
     return playerToAsk
+  }
+
+  pickPlayerAndCard(player) {
+    const cards = player.playerHand().filter(card => this._logs.slice(0, player._rembering).map(log => log.includes(card.rank())).includes(true))
+    if (cards.length !== 0) {
+      const player2 = this.findPlayerByName(this._logs.filter(log => log.includes(cards[0].rank()))[0].match(/^([\w\-]+)/)[0])
+      if (player !== player2) {
+        return [cards[0], player2]
+      }
+    }
+    return this.randomCardAndPlayer(player)
+  }
+
+  randomCardAndPlayer(player) {
+    return [player.playerHand()[Math.floor(Math.random() * player.playerHand().length)], this.randomPlayer()]
   }
 
   removeAllCardsFromDeck() {

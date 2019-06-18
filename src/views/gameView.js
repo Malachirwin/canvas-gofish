@@ -11,7 +11,6 @@ class GameView extends React.Component {
       game: props.game,
       targetPlayer: '',
       targetCard: '',
-      logs: []
     }
   }
 
@@ -48,14 +47,14 @@ class GameView extends React.Component {
     return (
     <div className="center">
       <CenterView game={this.state.game} targetPlayer={this.state.targetPlayer} clicked={this.selectThePlayer.bind(this)} />
-      <PlayerView reset={this.reset.bind(this)} targetPlayer={this.state.targetPlayer} clicked={this.selectTheCard.bind(this)} game={this.state.game} player={this.state.game.player()} logs={this.state.logs} targetCard={this.state.targetCard}/>
+      <PlayerView reset={this.reset.bind(this)} targetPlayer={this.state.targetPlayer} clicked={this.selectTheCard.bind(this)} game={this.state.game} player={this.state.game.player()} targetCard={this.state.targetCard}/>
     </div>
     )
   }
 
   skipPlayer() {
     this.state.game.nextTurn()
-    this.state.logs.unshift(...this.state.game.botTurns())
+    this.state.game.botTurns()
     if (this.state.game.winner() !== false) {
       this.props.onload()
     }

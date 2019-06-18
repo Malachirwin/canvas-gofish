@@ -3,6 +3,7 @@ class Player {
     this._name = name
     this._cards = cards
     this._matches = []
+    this._rembering = Math.floor(Math.random() * 20)
   }
 
   name() {

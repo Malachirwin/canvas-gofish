@@ -3,7 +3,7 @@ import Card from '../../models/card'
 describe("Game", () => {
   let game, player1, player2, player3, player4
   beforeEach(() => {
-    game = new Game('Malachi')
+    game = new Game('Malachi', 'easy')
     player1 = game.findPlayer(1)
     player2 = game.findPlayer(2)
     player3 = game.findPlayer(3)

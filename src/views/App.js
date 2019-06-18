@@ -17,8 +17,8 @@ class App extends React.Component {
     this.setState({view: 'Login', game: undefined})
   }
 
-  startGame(name) {
-    const game = new Game(name)
+  startGame(name, level) {
+    const game = new Game(name, level)
     this.setState({ view: '', game: game})
   }
 
